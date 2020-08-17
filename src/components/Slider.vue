@@ -2,33 +2,11 @@
     <div>
         <div class="cont swiper-container swiper-container-horizontal">
             <div class="swiper-wrapper">
-                <div class="swiper-slide paddin-lr">
+                <div v-for="citation in randomCitation" v-bind:key="citation.id" class="swiper-slide paddin-lr">
                     <div class="back-slide container">
-                        <h2 class="slide-text fz">Le mepris est plus quotidien que le pain.</h2>
+                        <h2 class="slide-text fz">{{ citation.content }}</h2>
                         <h3 class="slide-auteur">
-                            Noureddine Aba
-                        </h3>
-                        <h4 class="slide-auteur font-small col-gre">
-                            lettre de 1648 e son fils. Parfois attribue aussi au Cardinal de Richelieu
-                        </h4>
-                    </div>
-                </div>
-                <div class="swiper-slide paddin-lr">
-                    <div class="back-slide container">
-                        <h2 class="slide-text fz">Le mepris est plus quotidien que le pain.</h2>
-                        <h3 class="slide-auteur">
-                            Noureddine Aba
-                        </h3>
-                        <h4 class="slide-auteur font-small col-gre">
-                            lettre de 1648 e son fils. Parfois attribue aussi au Cardinal de Richelieu
-                        </h4>
-                    </div>
-                </div>
-                <div class="swiper-slide paddin-lr">
-                    <div class="back-slide container">
-                        <h2 class="slide-text fz">Le mepris est plus quotidien que le pain.</h2>
-                        <h3 class="slide-auteur">
-                            Noureddine Aba
+                            {{ citation.author.firstName }} {{ citation.author.lastName }}
                         </h3>
                         <h4 class="slide-auteur font-small col-gre">
                             lettre de 1648 e son fils. Parfois attribue aussi au Cardinal de Richelieu
@@ -45,8 +23,11 @@
             </div>
         </div>
     </div>
-
 </template>
 <script lang="ts">
-    export default {}
+    export default {
+        props: {
+            randomCitation: Array
+        }
+    }
 </script>

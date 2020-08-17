@@ -4,12 +4,12 @@
             <div>
                 <GeneralSectionTitle  text="les plus recentes" css="x-titre text-color"></GeneralSectionTitle>
                 <div class="no-padding gr-d-9 gr-tl-9 gr-t-12 gr-c-12">
-                    <BlocCitationTypeMoreRecent></BlocCitationTypeMoreRecent>
+                    <BlocCitationTypeMoreRecent :citations='allCitations'></BlocCitationTypeMoreRecent>
                 </div>
                 <div class="gr-d-3 gr-tl-3 gr-t-12 gr-c-12 gauche">
                     <div class="gr-12 center-tag paddin-gr">
                         <GeneralSectionTitle text="tous les themes" css="text-color tag-title entete"></GeneralSectionTitle>
-                        <ListAllTheme></ListAllTheme>
+                        <ListAllTheme :themes="quelquesThemes"></ListAllTheme>
                     </div>
                     <div class="btn-group-parent gr-12">
                         <a href="" class="btn-style">Tous les themes</a>
@@ -19,7 +19,7 @@
                     </div>
                     <div class="gr-12 center-tag paddin-gr">
                         <GeneralSectionTitle text="tous les auteurs" css="text-color tag-title entete"></GeneralSectionTitle>
-                        <ListAllAuthor></ListAllAuthor>
+                        <ListAllAuthor :authors="quelquesAuthors"></ListAllAuthor>
                     </div>
                     <div class="btn-group-parent gr-12">
                         <a href="" class="btn-style">Tous les auteurs</a>
@@ -30,17 +30,61 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
     import GeneralSectionTitle from "@/components/GeneralSectionTitle.vue";
     import BlocCitationTypeMoreRecent from "@/components/BlocCitationTypeMoreRecent.vue";
     import ListAllAuthor from "@/components/ListAllAuthor.vue";
     import ListAllTheme from "@/components/ListAllTheme.vue";
+    import citationsDataService from "@/citationsDataService";
+    import themeDataService from "@/themeDataService";
+    import authorsDataService from "@/authorsDataService";
     export default {
+        //props: ['citations'],
+        data(){
+            return {
+                allCitations: null,
+                quelquesThemes: [],
+                quelquesAuthors: []
+            }
+        },
         components: {
             GeneralSectionTitle,
             BlocCitationTypeMoreRecent,
             ListAllAuthor,
             ListAllTheme
+        },
+
+        methods:{
+            retrieveCitations(){
+                citationsDataService.getAll().then((response) => {
+                    this.allCitations = response.data['hydra:member'];
+                }).catch( (error)=>{
+                    console.log(error)
+                })
+            },
+            retrieveThemes(){
+                themeDataService.getAll().then((response) => {
+                    const data = response.data['hydra:member'];
+                    for (let i=0; i< 20; i++){
+                        this.quelquesThemes.push(data[i])
+                    }
+                }).catch( (error)=>{
+                    console.log(error)
+                });
+            },
+            retrieveAuthor(){
+                authorsDataService.getAll().then((response)=>{
+                    const data = response.data['hydra:member'];
+                    for (let i=0; i< 20; i++){
+                        this.quelquesAuthors.push(data[i])
+                    }
+                })
+            }
+        },
+        mounted() {
+            this.retrieveCitations();
+            this.retrieveThemes();
+            this.retrieveAuthor()
         }
     }
 </script>

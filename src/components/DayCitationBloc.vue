@@ -1,8 +1,10 @@
 <template>
     <div>
         <div class="x-bloccitations po-center pad-bloc">
-            <h2 class="theme citation text-color fz">Le mepris est plus quotidien que le pain.</h2>
-            <h3 class="auteur-citation text-color"><a href="#">Noureddine Aba</a></h3>
+            <h2 class="theme citation text-color fz">{{ citation.content }}</h2>
+            <h3 class="auteur-citation text-color">
+                <a href="#">{{ citation.author.lastName }} {{ citation.author.lastName }}
+                </a></h3>
             <h4 class="sign-citation">lettre de 1648 e son fils. Parfois attribue aussi au Cardinal de Richelieu</h4>
             <div class="pad-bloc-top po-center">
                 <div class="tag-text">
@@ -28,5 +30,9 @@
     </div>
 </template>
 <script lang="ts">
-    export default {}
+    export default {
+        props: {
+            citation: Object
+        }
+    }
 </script>

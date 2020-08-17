@@ -2,7 +2,7 @@
     <div class="mobile row paddin-lr x-row">
         <div class="global-content container">
             <GeneralSectionTitle text="CITATIONS DU JOUR" css="x-titre text-color"></GeneralSectionTitle>
-            <DayCitationBloc></DayCitationBloc>
+            <DayCitationBloc :citation="citation"></DayCitationBloc>
         </div>
         <div class="theme-jour-content container">
             <GeneralSectionTitle text="les themes du jour" css="x-titre text-color"></GeneralSectionTitle>
@@ -14,16 +14,32 @@
     </div>
 </template>
 
-<script lang="ts">
+<script>
     import GeneralSectionTitle from "@/components/GeneralSectionTitle.vue";
     import DayCitationBloc from "@/components/DayCitationBloc.vue";
     import DayThemeBloc from "@/components/DayThemeBloc.vue";
+    import citationsDataService from "@/citationsDataService";
 
     export default {
         components: {
             DayCitationBloc,
             DayThemeBloc,
             GeneralSectionTitle
+        },
+        data(){
+            return{
+                citation: Object
+            }
+        },
+        methods:{
+            retrieveDayCitation(){
+                citationsDataService.getDayCitation().then( (response=>{
+                    this.citation = response.data
+                }))
+            }
+        },
+        created() {
+            this.retrieveDayCitation()
         }
     }
 </script>
