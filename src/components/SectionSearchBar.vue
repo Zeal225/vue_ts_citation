@@ -8,15 +8,15 @@
                         <span class="btn-mobile mobile-left"></span>
                         <button class="btn-input-s js-btn-none">rechercher</button>
                     </div>
-                    <div id="lettre" class="js js-hide" data="alpabet">
+                    <div @click.prevent="showAlphabetLetter" id="lettre" class="js js-hide" data="alpabet">
                         <a href="">a > z</a>
                     </div>
-                    <div id="tag-search" class="js js-hide" data="words">
+                    <div @click.prevent="showThemeLetter" id="tag-search" class="js js-hide" data="words">
                     </div>
                 </form>
                 <div class="pannel">
                     <div class="row collaspe">
-                        <div class="row alpabet" id="alpabet">
+                        <div v-if="this.$store.getters.showAlphabetLetter" class="row alpabet" id="alpabet">
                             <div class="flex">
                                 <a href="" class="first-letter">a</a>
                                 <a href="">b</a>
@@ -46,23 +46,9 @@
                                 <a href="">z</a>
                             </div>
                         </div>
-                        <div class="words" id="words">
+                        <div v-if="this.$store.getters.showThemeWord" class="words" id="words">
                             <div class="flex-lettre">
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
-                                <div><a href="">letters</a></div>
+                                <div v-for="theme in themes" :key="theme.id"><a href="">{{ theme.name }}</a></div>
                             </div>
                         </div>
                     </div>
@@ -72,6 +58,35 @@
     </div>
 </template>
 
-<script lang="ts">
-    export default {}
+<script>
+    import themeDataService from "@/themeDataService";
+
+    export default {
+      data(){
+        return{
+          themes: {}
+        }
+      },
+      methods:{
+        showAlphabetLetter(){
+          this.$store.dispatch("showAlphabetLetter");
+        },
+        showThemeLetter(){
+          this.$store.dispatch("showThemeWord");
+        },
+
+        //all themes
+        retrieveThemes(){
+          themeDataService.getAll().then((response) => {
+            const data = response.data['hydra:member'];
+            this.themes = data;
+          }).catch( (error)=>{
+            console.log(error)
+          });
+        },
+      },
+      created() {
+        this.retrieveThemes()
+      }
+    }
 </script>

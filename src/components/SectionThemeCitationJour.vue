@@ -34,7 +34,7 @@
         methods:{
             retrieveDayCitation(){
                 citationsDataService.getDayCitation().then( (response=>{
-                    this.citation = response.data
+                    this.citation = response.data;
                 }))
             }
         },

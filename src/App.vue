@@ -8,14 +8,16 @@
       <Footer></Footer>
   </div>
 </template>
-<script lang="ts">
+<script>
     import Footer from "@/components/Footer.vue";
     export default {
         components: {
             Footer
-        }
+        },
+      mounted() {
+          this.$store.commit('hideModal', ".x-menu, .nav-not-hide")
+      }
     }
 </script>
-
 <style lang="scss">
 </style>

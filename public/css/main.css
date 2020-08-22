@@ -1055,7 +1055,7 @@ accordion
 ======================*/
 
 .accordion {
-    display: none;
+    /*display: none;*/
 }
 
 .accord {
@@ -1193,7 +1193,7 @@ div#lettre {
 
 .words,
 .alpabet {
-    display: none;
+    /*display: none;*/
 }
 
 .row.collaspe {

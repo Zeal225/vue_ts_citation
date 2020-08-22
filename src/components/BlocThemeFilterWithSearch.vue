@@ -10,34 +10,38 @@
         </form>
     </div>
     <div class="words-membre class" id="" style="display: block;">
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
-        <div class="words-content" ><span class="words-mytheme"><a href="">letters</a><span class="close">&times;</span></span></div>
+        <div v-for="theme in themes" :key="theme.id" class="words-content" >
+          <span class="words-mytheme">
+            <a href="">{{ theme.name }}</a>
+            <span class="close">&times;</span>
+          </span>
+        </div>
         <!-- -->
     </div>
 </div>
 </template>
-<script lang="ts">
-    export default {}
+<script>
+    import themeDataService from "@/themeDataService";
+
+    export default {
+      data(){
+        return{
+          themes: {}
+        }
+      },
+      methods:{
+        //all themes
+        retrieveThemes(){
+          themeDataService.getAll().then((response) => {
+            const data = response.data['hydra:member'];
+            this.themes = data;
+          }).catch( (error)=>{
+            console.log(error)
+          });
+        },
+      },
+      created() {
+        this.retrieveThemes()
+      }
+    }
 </script>

@@ -1,7 +1,7 @@
 <template>
-    <div class="loup-rech dis-n" id="member-icon">
-        <div class="padding padding-membre">
-            <span id="member-menu" class="bk-connexion"></span><span class="text-member">sign up <span class="or">or</span> login</span>
+    <div v-if="this.$store.getters.showNavBarConnexion" class="loup-rech" id="member-icon">
+        <div class="padding padding-membre nav-not-hide">
+            <span @click="showNavBarConnexion" id="member-menu" class="bk-connexion"></span><span class="text-member">sign up <span class="or">or</span> login</span>
             <form>
                 <input type="text" name="" id="x-loop" placeholder="votre identifiant">
                 <input type="text" name="" id="x-loop" placeholder="votre mot de passe">
@@ -15,6 +15,12 @@
     </div>
 </template>
 
-<script lang="ts">
-    export default {}
+<script>
+    export default {
+      methods:{
+        showNavBarConnexion(){
+          this.$store.dispatch("showNavBarConnexion");
+        }
+      }
+    }
 </script>

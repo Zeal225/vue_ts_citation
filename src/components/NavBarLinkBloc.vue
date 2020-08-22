@@ -1,7 +1,7 @@
 <template>
-    <div class="loup-rech dis-n" id="menu-icon">
-        <div class="padding">
-            <span id="span-menu"></span>
+    <div v-if="this.$store.getters.showNavBarMenu" class="loup-rech" id="menu-icon">
+        <div class="padding nav-not-hide">
+            <span @click="showNavBarMenu" id="span-menu"></span>
             <ul class="x-l">
                 <router-link tag="li" :to="{ name: 'theme'}">
                     <a>tous les themes</a>
@@ -18,6 +18,12 @@
     </div>
 </template>
 
-<script lang="ts">
-    export default {}
+<script>
+    export default {
+      methods:{
+        showNavBarMenu(){
+          this.$store.dispatch("showNavBarMenu");
+        }
+      }
+    }
 </script>
