@@ -1,9 +1,15 @@
 <template>
     <div class="gr-12 x-citation">
         <h1>
-            <img src="images/quote_rig.svg" class="griff">
-            <span class="logo">
-                <a href="index.html" class="logo-color">citation-emporieum</a>
+<!--          <img src="images/quote_rig.svg" class="griff">-->
+<!--          <img v-bind:src="'dist/images/mockup-img/'+category.image_categorie">-->
+          <img src="/images/quote_rig.svg" class="griff">
+          <span class="logo">
+<!--                <a href="/" class="logo-color">citation-emporieum</a>-->
+
+            <router-link tag="a" :to="{ name: 'home'}" class="logo-color">
+                   citation-emporieum
+            </router-link>
             </span>
         </h1>
         <ul class="x-menu">

@@ -10,12 +10,14 @@
 </template>
 <script>
     import Footer from "@/components/Footer.vue";
+    import $ from "jquery";
     export default {
         components: {
             Footer
         },
       mounted() {
-          this.$store.commit('hideModal', ".x-menu, .nav-not-hide")
+          this.$store.commit('hideModal', ".x-menu, .nav-not-hide");
+          this.$store.commit('accordionAuthor');
       }
     }
 </script>
