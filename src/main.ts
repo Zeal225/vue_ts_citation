@@ -1,3 +1,4 @@
+// @ts-ignore
 import Vue from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
@@ -10,10 +11,11 @@ Vue.use(axios)
 
 Vue.config.productionTip = false;
 
+// @ts-ignore
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h: (arg0: { components: { Footer: {}; }; mounted(): void; }) => void) => h(App)
 }).$mount('#app');
 
 router.beforeEach((to, from, next) => {

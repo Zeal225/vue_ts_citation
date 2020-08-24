@@ -3,7 +3,7 @@
     <!-- debut -->
     <div v-for="author in authors" :key="author.id" class="">
         <div class="x-bloccitations accor-marge">
-            <div @click="accordionManage" class="accord bloc-citation relative padding-1" :data-elm="'target-'+author.id">
+            <div @click="toggleAccordion(author.id)" class="accord bloc-citation relative padding-1" :data-elm="'target-'+author.id">
                 <h2 class="text-color entete nom-auteur orange">{{ author.firstName }} {{ author.lastName }}</h2>
                 <span class="text-color voir-plus voir">voir les citations de
                   <span class="orange">{{ author.firstName }} {{ author.lastName }}</span>
@@ -75,22 +75,18 @@
           authorsDataService.getAll().then((response)=>{
             const data = response.data['hydra:member'];
             this.authors = data;
-            console.log(data)
           })
         },
-        accordionManage(){
-          //this.$store.dispatch('accordionAuthorMutation')
-          let authorBloc = document.querySelectorAll('.accord');
-          authorBloc.forEach((element, index)=>{
-
-            element.addEventListener('click', function (event){
-              const currentElement = event.currentTarget;
-              // @ts-ignore
-              const target = currentElement.getAttribute('data-elm');
-              const targetElement = document.getElementById(""+target+"")
-              // @ts-ignore
-              targetElement.classList.toggle('dis-n')
-            })
+        toggleAccordion(id){
+           this.authors.map((author, index) => {
+             const i = index+1;
+            if (i === id){
+              const elm = document.getElementById("target-"+i)
+              elm.classList.toggle('dis-n')
+            }else {
+              const elm = document.getElementById("target-"+i)
+              elm.classList.add('dis-n')
+            }
           })
         }
       },
