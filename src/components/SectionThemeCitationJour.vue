@@ -14,7 +14,7 @@
     </div>
 </template>
 
-<script>
+<script lang="js">
     import GeneralSectionTitle from "@/components/GeneralSectionTitle.vue";
     import DayCitationBloc from "@/components/DayCitationBloc.vue";
     import DayThemeBloc from "@/components/DayThemeBloc.vue";
@@ -35,6 +35,7 @@
             retrieveDayCitation(){
                 citationsDataService.getDayCitation().then( (response=>{
                     this.citation = response.data;
+                    console.log(this.citation)
                 }))
             }
         },

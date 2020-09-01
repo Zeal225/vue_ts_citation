@@ -8,7 +8,6 @@ class CitationsDataService {
 
     getDayCitation(){
         let id = Math.floor(Math.random() * 20) + 1;
-        console.log(id)
         return http.get("/citations/"+id)
     }
 }

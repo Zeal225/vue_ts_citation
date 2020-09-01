@@ -19,5 +19,8 @@ class ThemeDataService {
             console.log(error)
         }))
     }
+    getThemeCitation(id: number){
+        return http.get("/themes/"+id)
+    }
 }
 export default new ThemeDataService();

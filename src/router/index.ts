@@ -42,6 +42,11 @@ const routes = [
     path: '/membre/:user/citation',
     name: 'mes-citation',
     component: () => import('../views/MemberPageCitation.vue')
+  },
+  {
+    path: '/themes/:theme/citations',
+    name: 'theme-citations',
+    component: () => import('../views/ThemeCitation.vue')
   }
 ];
 

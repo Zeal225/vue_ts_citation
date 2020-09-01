@@ -48,7 +48,9 @@
                         </div>
                         <div v-if="this.$store.getters.showThemeWord" class="words" id="words">
                             <div class="flex-lettre">
-                                <div v-for="theme in themes" :key="theme.id"><a href="">{{ theme.name }}</a></div>
+                                <div v-for="theme in themes" :key="theme.id">
+                                  <router-link tag="a" :to="{ name: 'theme-citations', params: { theme: theme.id }}">{{ theme.name }}</router-link>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -80,6 +82,7 @@
           themeDataService.getAll().then((response) => {
             const data = response.data['hydra:member'];
             this.themes = data;
+            console.log(data);
           }).catch( (error)=>{
             console.log(error)
           });

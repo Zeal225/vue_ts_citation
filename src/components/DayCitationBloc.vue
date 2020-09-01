@@ -8,9 +8,11 @@
             <h4 class="sign-citation">lettre de 1648 e son fils. Parfois attribue aussi au Cardinal de Richelieu</h4>
             <div class="pad-bloc-top po-center">
                 <div class="tag-text">
-                    <a href="#">gouvernement, </a>
-                    <a href="#">sagesse, </a>
-                    <a href="#">monde</a>
+                  <router-link
+                      v-for="theme in citation.themes"
+                      :key="theme.id" :to="{ name: 'theme-citations', params: { theme: theme['@id'] }}"
+                      tag="a">{{ theme.name }},
+                  </router-link>
                 </div>
                 <div class="tag-icon border-style">
                     <a href="#" class="icon star"></a>
@@ -29,7 +31,7 @@
         </div>
     </div>
 </template>
-<script lang="ts">
+<script>
     export default {
         props: {
             citation: Object
