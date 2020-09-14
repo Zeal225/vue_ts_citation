@@ -68,7 +68,7 @@
       data(){
         return{
           themes: {},
-          searchText: null
+          searchText: ''
         }
       },
       methods:{
@@ -81,7 +81,7 @@
 
         validSearch(){
           const search = encodeURI(this.searchText);
-          if (search.length > 0) {
+          if (search.trim().length > 0) {
             const path = `/citations/results/${search}`
             if (this.$route.path !== path) this.$router.push(path)
           }
