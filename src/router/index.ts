@@ -67,9 +67,6 @@ const router = new VueRouter({
   routes
 })
 
-/*router.beforeEach((to, from, next) => {
-  console.log("router change")
-})*/
 
 router.afterEach((to, from) => {
   store.commit('hideAllModal');

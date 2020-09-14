@@ -38,9 +38,7 @@
       methods: {
         async getThemeCitation(){
           const authorId = parseInt(this.$route.params.id);
-          console.log(authorId)
           const  response = await authorsDataService.getAuthorCitation(authorId);
-         console.log(response)
           this.citations = response.data.citations;
           this.themeName = response.data.firstName +' '+response.data.lastName
         }

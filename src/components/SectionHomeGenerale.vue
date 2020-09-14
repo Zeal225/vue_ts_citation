@@ -59,7 +59,7 @@
                 citationsDataService.getAll().then((response) => {
                     this.allCitations = response.data['hydra:member'];
                 }).catch( (error)=>{
-                    console.log(error)
+
                 })
             },
             retrieveThemes(){
@@ -69,7 +69,7 @@
                         this.quelquesThemes.push(data[i])
                     }
                 }).catch( (error)=>{
-                    console.log(error)
+
                 });
             },
             retrieveAuthor(){

@@ -13,10 +13,8 @@ class ThemeDataService {
                     themeArray.push(el)
                 }
             })
-            console.log(themeArray)
             return themeArray
         })).catch( (error => {
-            console.log(error)
         }))
     }
     getThemeCitation(id: number){

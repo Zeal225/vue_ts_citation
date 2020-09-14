@@ -36,7 +36,6 @@
             const data = response.data['hydra:member'];
             this.themes = data;
           }).catch( (error)=>{
-            console.log(error)
           });
         },
       },

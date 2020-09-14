@@ -44,7 +44,6 @@ export default {
           this.citationsSlide.push(data[i])
         }
       })).catch((error=>{
-        console.log(error)
       }))
     }
   },
