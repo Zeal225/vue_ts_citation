@@ -4,9 +4,9 @@
             <div class="row" id="inline-search-block">
                 <form id="inline-search">
                     <div class="" id="embed-search">
-                        <input type="search" placeholder="taper un ou pulisieurs mots cles" class="input-s js-taille js-btn-serach">
+                        <input v-model="searchText" type="search" placeholder="taper un mot clé" class="input-s js-taille js-btn-serach">
                         <span class="btn-mobile mobile-left"></span>
-                        <button class="btn-input-s js-btn-none">rechercher</button>
+                        <button @click.prevent="validSearch" class="btn-input-s js-btn-none">rechercher</button>
                     </div>
                     <div @click.prevent="showAlphabetLetter" id="lettre" class="js js-hide" data="alpabet">
                         <a href="">a > z</a>
@@ -62,11 +62,13 @@
 
 <script>
     import themeDataService from "@/themeDataService";
+    import router from "@/router";
 
     export default {
       data(){
         return{
-          themes: {}
+          themes: {},
+          searchText: null
         }
       },
       methods:{
@@ -77,12 +79,20 @@
           this.$store.dispatch("showThemeWord");
         },
 
+        validSearch(){
+          const search = encodeURI(this.searchText);
+          if (search.length > 0) {
+            const path = `/citations/results/${search}`
+            if (this.$route.path !== path) this.$router.push(path)
+          }
+          //router.push({path: "citations/results/"+search, params:{text: search}})
+        },
+
         //all themes
         retrieveThemes(){
           themeDataService.getAll().then((response) => {
             const data = response.data['hydra:member'];
             this.themes = data;
-            console.log(data);
           }).catch( (error)=>{
             console.log(error)
           });

@@ -7,8 +7,12 @@ class CitationsDataService {
     }
 
     getDayCitation(){
-        let id = Math.floor(Math.random() * 20) + 1;
+        let id = Math.floor(Math.random() * 200) + 1;
         return http.get("/citations/"+id)
+    }
+
+    searchCitations(text: string){
+        return  http.get('/citations?content='+text)
     }
 }
 

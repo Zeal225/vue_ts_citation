@@ -1,8 +1,9 @@
 <template>
     <h3 class="teme">
-        <span>
-            <a v-for="author in authors" href="" v-bind:key="author.id">{{ author.firstName }} {{ author.lastName}}</a>
-        <span class="serparateur"></span>
+
+      <span v-for="(author, index) in authors" v-bind:key="author.id" :v-if="index < 20">
+           <router-link tag="a" :to="{ name: 'author-citations', params: { id: author.id }}">{{ author.firstName }} {{ author.lastName}}</router-link>
+            <span class="serparateur"></span>
         </span>
     </h3>
 </template>

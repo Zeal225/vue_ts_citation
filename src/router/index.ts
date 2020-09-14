@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -47,6 +48,16 @@ const routes = [
     path: '/themes/:theme/citations',
     name: 'theme-citations',
     component: () => import('../views/ThemeCitation.vue')
+  },
+  {
+    path: '/authors/:id',
+    name: 'author-citations',
+    component: () => import('../views/AuthorCitation.vue')
+  },
+  {
+    path: '/citations/results/:text',
+    name: 'citations-search',
+    component: () => import('../views/CitationRechercheResultat.vue')
   }
 ];
 
@@ -56,4 +67,11 @@ const router = new VueRouter({
   routes
 })
 
+/*router.beforeEach((to, from, next) => {
+  console.log("router change")
+})*/
+
+router.afterEach((to, from) => {
+  store.commit('hideAllModal');
+})
 export default router

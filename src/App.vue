@@ -17,7 +17,6 @@
         },
       mounted() {
           this.$store.commit('hideModal', ".x-menu, .nav-not-hide");
-          this.$store.commit('accordionAuthor');
       }
     }
 </script>

@@ -6,7 +6,7 @@
                     {{ citation.content }}
                 </h2>
                 <h3 class="auteur-citation text-color x-pad-mescitations">
-                    <a href="#">{{ citation.author }}</a>
+<!--                    <a href="#">{{ citation.author.firstName }} {{ citation.author.lastName }}</a>-->
                 </h3>
                 <h4 class="sign-citation">
                     lettre de 1648 e son fils. Parfois attribue aussi au
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <div class="container center margin-2-auto">
+        <div v-if="citations.length > 0" class="container center margin-2-auto">
             <div class="fle-che">
                 <a class="round-number direction fl-left arrow-left-end-blue" href=""></a>
                 <a class="round-number direction fl-left arrow-left-blue" href=""></a>
@@ -50,6 +50,9 @@
                 <a class="round-number direction fl-rig arrow-right-end-blue" href=""></a>
             </div>
         </div>
+      <div v-else>
+        <h2>Aucune citation ne correspond à votre recherche</h2>
+      </div>
     </div>
 </template>
 <script>
