@@ -71,6 +71,8 @@
 </template>
 <script>
     import authorsDataService from "@/authorsDataService";
+    import citationsDataService from "@/citationsDataService";
+
     import LoadingPlugin from 'vue-loading-overlay'
     import 'vue-loading-overlay/dist/vue-loading.css'
 
@@ -86,29 +88,32 @@
         }
       },
       methods: {
-        retrieveAuthor(){
+        async getAphabetCitation(){
+          //const letter = 'A';
+          const letter = this.$route.params.letter;
           this.isLoading = true;
-          authorsDataService.getAll().then((response)=>{
-            const data = response.data['hydra:member'];
-            this.authors = data;
-            this.isLoading = false;
-          })
+          const  response = await citationsDataService.findCitationsByAuthorsFirstLetterOfName(letter.toLocaleUpperCase());
+          const data = response.data["hydra:member"];
+          this.isLoading = false;
+          this.authors = data;
         },
         toggleAccordion(id){
            this.authors.map((author, index) => {
-             const i = index+1;
-            if (i === id){
-              const elm = document.getElementById("target-"+i)
+            if (parseInt(author.id) === id){
+              const elm = document.getElementById("target-"+parseInt(author.id))
               elm.classList.toggle('dis-n')
             }else {
-              const elm = document.getElementById("target-"+i)
+              const elm = document.getElementById("target-"+parseInt(author.id))
               elm.classList.add('dis-n')
             }
           })
         }
       },
       created() {
-        this.retrieveAuthor();
+        this.getAphabetCitation()
+      },
+      watch: {
+        '$route': 'getAphabetCitation'
       }
     }
 </script>

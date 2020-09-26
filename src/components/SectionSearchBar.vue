@@ -18,32 +18,9 @@
                     <div class="row collaspe">
                         <div v-if="this.$store.getters.showAlphabetLetter" class="row alpabet" id="alpabet">
                             <div class="flex">
-                                <a href="" class="first-letter">a</a>
-                                <a href="">b</a>
-                                <a href="">c</a>
-                                <a href="">d</a>
-                                <a href="">e</a>
-                                <a href="">f</a>
-                                <a href="">g</a>
-                                <a href="">h</a>
-                                <a href="">i</a>
-                                <a href="">j</a>
-                                <a href="">k</a>
-                                <a href="">l</a>
-                                <a href="">m</a>
-                                <a href="">n</a>
-                                <a href="">o</a>
-                                <a href="">p</a>
-                                <a href="">q</a>
-                                <a href="">r</a>
-                                <a href="">s</a>
-                                <a href="">t</a>
-                                <a href="">u</a>
-                                <a href="">v</a>
-                                <a href="">w</a>
-                                <a href="">x</a>
-                                <a href="">y</a>
-                                <a href="">z</a>
+                              <span  v-for="letter in letters" :key="letter">
+                                <router-link tag="a" :to="{ name: 'authors-letter-citations', params: { letter: letter }}">{{ letter }}</router-link>
+                              </span>
                             </div>
                         </div>
                         <div v-if="this.$store.getters.showThemeWord" class="words" id="words">
@@ -68,7 +45,8 @@
       data(){
         return{
           themes: {},
-          searchText: ''
+          searchText: '',
+          letters: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'y', 'z']
         }
       },
       methods:{
@@ -81,7 +59,7 @@
 
         validSearch(){
           const search = encodeURI(this.searchText);
-          if (search.trim().length > 0) {
+            if (search.trim().length > 0) {
             const path = `/citations/results/${search}`
             if (this.$route.path !== path) this.$router.push(path)
           }
@@ -98,7 +76,7 @@
         },
       },
       created() {
-        this.retrieveThemes()
+        this.retrieveThemes();
       }
     }
 </script>

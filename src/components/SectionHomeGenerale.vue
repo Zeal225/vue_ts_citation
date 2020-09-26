@@ -1,5 +1,11 @@
 <template>
     <div class="row pad-general x-row">
+      <div class="vld-parent">
+        <LoadingPlugin :active.sync="isLoading"
+                       :can-cancel="true"
+                       :is-full-page="fullPage">
+        </LoadingPlugin>
+      </div>
         <div class="container tes">
             <div>
                 <GeneralSectionTitle  text="les plus recentes" css="x-titre text-color"></GeneralSectionTitle>
@@ -38,20 +44,25 @@
     import citationsDataService from "@/citationsDataService";
     import themeDataService from "@/themeDataService";
     import authorsDataService from "@/authorsDataService";
+    import LoadingPlugin from 'vue-loading-overlay'
+    import 'vue-loading-overlay/dist/vue-loading.css'
     export default {
         //props: ['citations'],
         data(){
             return {
                 allCitations: null,
                 quelquesThemes: [],
-                quelquesAuthors: []
+                quelquesAuthors: [],
+              isLoading: false,
+              fullPage: true
             }
         },
         components: {
             GeneralSectionTitle,
             BlocCitationTypeMoreRecent,
             ListAllAuthor,
-            ListAllTheme
+            ListAllTheme,
+          LoadingPlugin
         },
 
         methods:{
@@ -63,23 +74,27 @@
                 })
             },
             retrieveThemes(){
+              this.isLoading = true;
                 themeDataService.getAll().then((response) => {
                     const data = response.data['hydra:member'];
                     for (let i=0; i< 20; i++){
                         this.quelquesThemes.push(data[i])
                     }
+                  this.isLoading = false
                 }).catch( (error)=>{
-
+                  this.isLoading = false
                 });
             },
             retrieveAuthor(){
+              this.isLoading = true;
                 authorsDataService.getAll().then((response)=>{
                     const data = response.data['hydra:member'];
                     for (let i=0; i< 20; i++){
                         this.quelquesAuthors.push(data[i])
                     }
+                  this.isLoading = false
                 })
-            }
+            },
         },
         mounted() {
             this.retrieveCitations();

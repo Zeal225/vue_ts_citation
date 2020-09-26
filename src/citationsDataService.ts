@@ -14,6 +14,10 @@ class CitationsDataService {
     searchCitations(text: string){
         return  http.get('/citations?content='+text)
     }
+
+    findCitationsByAuthorsFirstLetterOfName(letter: string){
+        return http.get("/authors?firstName="+letter)
+    }
 }
 
 export default new CitationsDataService()

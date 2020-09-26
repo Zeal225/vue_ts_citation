@@ -13,7 +13,8 @@
 <script>
     import GeneralSectionTitle from "@/components/GeneralSectionTitle.vue";
     import BlocCitationTypeMyCitation from "@/components/BlocCitationTypeMyCitation.vue";
-    import themeDataService from "@/themeDataService.ts";
+    //import themeDataService from "@/themeDataService.ts";
+    import citationsDataService from "@/citationsDataService";
     export default {
       data(){
         return{
@@ -27,18 +28,21 @@
             GeneralSectionTitle
         },
       methods: {
-          async getThemeCitation(){
-            const themeId = parseInt(this.$route.params.theme);
-            const  response = await themeDataService.getThemeCitation(themeId);
-            this.citations = response.data.citations;
-            this.themeName = response.data.name
+          async getAphabetCitation(){
+            const letter = 'A';
+            const  response = await citationsDataService.findCitationsByAuthorsFirstLetterOfName(letter);
+            console.log(response.data)
+            const data = response.data["hydra:member"];
+            console.log(data);
+            //this.citations = data.citations;
+            //this.themeName = response.data.name
           }
       },
       created() {
-          this.getThemeCitation()
+          this.getAphabetCitation()
       },
       watch: {
-        '$route': 'getThemeCitation'
+        '$route': 'getAphabetCitation'
       }
     }
 </script>

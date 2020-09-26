@@ -1,6 +1,7 @@
 
 const state = {
-    show: false
+    show: false,
+    authors: {}
 };
 
 const mutations  = {

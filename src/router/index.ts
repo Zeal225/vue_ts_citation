@@ -49,6 +49,12 @@ const routes = [
     name: 'theme-citations',
     component: () => import('../views/ThemeCitation.vue')
   },
+    //
+  {
+    path: '/authors/:letter/citations',
+    name: 'authors-letter-citations',
+    component: () => import('../views/AlphabetAllAuthor.vue')
+  },
   {
     path: '/authors/:id',
     name: 'author-citations',
